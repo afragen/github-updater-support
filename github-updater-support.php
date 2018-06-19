@@ -12,8 +12,8 @@
  * Requires PHP:      5.6
  */
 
-add_filter( 'github_updater_disable_wpcron', '__return_true' );
-
-include_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 
 WP_Dependency_Installer::instance()->run( __DIR__ );
+
+add_filter( 'github_updater_disable_wpcron', '__return_true' );
