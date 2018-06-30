@@ -1,6 +1,6 @@
 # GitHub Updater Support
 
-Contributors: [Andy Fragen](https://github.com/afragen), [contributors](https://github.com/afragen/github-updater-support/graphs/contributors)
+Contributors: afragen
 Tags: github-updater, extension, support
 Requires at least: 4.6
 Requires PHP: 5.6
