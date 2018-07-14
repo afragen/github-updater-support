@@ -1,11 +1,12 @@
 [
   {
-    "name": "Query Monitor",
-    "host": "wordpress",
-    "slug": "query-monitor/query-monitor.php",
-    "uri": "https://wordpress.org/plugins/query-monitor/",
-    "branch": "trunk",
-    "optional": false
+    "name": "WP Debugging",
+    "host": "github",
+    "slug": "wp-debugging/wp-debugging.php",
+    "uri": "https://github.com/afragen/wp-debugging",
+    "branch": "master",
+    "optional": false,
+    "token": null
   },
   {
     "name": "GitHub Updater",
