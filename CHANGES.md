@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 1.2.0
+* update `wp-dependencies.json` to use new [WP Debugging](https://github.com/afragen/wp-debugging) plugin, which automatically adds debugging constants to `wp-config.php` and installs Query Monitor and Debug Quick Look plugins
+
 #### 1.1.1
 * update readme.txt for proper display of contributors
 

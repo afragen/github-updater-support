@@ -13,7 +13,7 @@ A support/troubleshooting plugin for GitHub Updater.
 
 ## Description
 
-This plugin bypasses the WP-Cron updating normally used by GitHub Updater. Additionally it installs and activates the [Query Monitor](https://wordpress.org/plugins/query-monitor/) plugin to aid in debugging and troubleshooting.
+This plugin bypasses the WP-Cron updating normally used by GitHub Updater. Additionally it installs and activates the [WP Debugging](https://github.com/afragen/wp-debugging) plugin to aid in debugging and troubleshooting.
 
 ## Development
 
