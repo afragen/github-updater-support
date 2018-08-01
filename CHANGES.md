@@ -1,5 +1,6 @@
 #### [unreleased]
 
+* composer update
 #### 1.3.0
 * update composer dependendencies
 
