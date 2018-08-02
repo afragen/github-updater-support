@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 1.3.2
+* composer update
+
 #### 1.3.1
 * composer update
 * make `GitHub Updater` required, duh
