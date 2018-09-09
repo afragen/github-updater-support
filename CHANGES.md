@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 1.3.3
+* composer update, removed `vendor/composer/installer` now much lighter
+
 #### 1.3.2
 * composer update
 
