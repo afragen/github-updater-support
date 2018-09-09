@@ -3,7 +3,7 @@
  * Plugin Name:       GitHub Updater Support
  * Plugin URI:        https://github.com/afragen/github-updater-support
  * Description:       A support/troubleshooting plugin for use with GitHub Updater.
- * Version:           1.3.2
+ * Version:           1.3.3
  * Author:            Andy Fragen
  * License:           MIT
  * Network:           true
