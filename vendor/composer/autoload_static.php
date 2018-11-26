@@ -6,14 +6,16 @@ namespace Composer\Autoload;
 
 class ComposerStaticInitd1d660edd05c760138dca4d91702412e
 {
-    public static $files = array (
-        'f51bb131284ceb3bf7d980d1de33e647' => __DIR__ . '/..' . '/collizo4sky/persist-admin-notices-dismissal/persist-admin-notices-dismissal.php',
-        '35bd6a751b552e7a94ae27bc4c52b33a' => __DIR__ . '/..' . '/afragen/wp-dependency-installer/wp-dependency-installer.php',
+    public static $classMap = array (
+        'PAnD' => __DIR__ . '/..' . '/collizo4sky/persist-admin-notices-dismissal/persist-admin-notices-dismissal.php',
+        'WPDI_Plugin_Installer_Skin' => __DIR__ . '/..' . '/afragen/wp-dependency-installer/wp-dependency-installer.php',
+        'WP_Dependency_Installer' => __DIR__ . '/..' . '/afragen/wp-dependency-installer/wp-dependency-installer.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->classMap = ComposerStaticInitd1d660edd05c760138dca4d91702412e::$classMap;
 
         }, null, ClassLoader::class);
     }
