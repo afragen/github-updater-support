@@ -1,12 +1,6 @@
 #### [unreleased]
 
-#### 1.3.6
-* composer upgrade
-
-#### 1.3.5
-* composer update
-
-#### 1.3.4
+#### 1.3.4 - 1.3.7
 * composer update
 
 #### 1.3.3
