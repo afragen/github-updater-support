@@ -6,7 +6,7 @@ Requires at least: 4.6
 Requires PHP: 5.6
 Tested up to: 5.0
 Stable tag: master
-Donate link: http://thefragens.com/github-updater-donate
+Donate link: https://thefragens.com/github-updater-donate
 License: MIT
 
 A support/troubleshooting plugin for GitHub Updater.
