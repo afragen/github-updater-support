@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 1.3.9
+* update composer dependencies
+
 #### 1.3.8
 * added `wp i18n make-pot` to `composer.json`
 
