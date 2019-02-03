@@ -1,12 +1,10 @@
 [
   {
     "name": "WP Debugging",
-    "host": "github",
+    "host": "wordpress",
     "slug": "wp-debugging/wp-debugging.php",
-    "uri": "https://github.com/afragen/wp-debugging",
-    "branch": "master",
-    "optional": false,
-    "token": null
+    "uri": "https://wordpress.org/plugins/wp-debugging",
+    "optional": false
   },
   {
     "name": "GitHub Updater",
