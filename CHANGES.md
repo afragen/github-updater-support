@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 1.4.0
+* update WP dependencies
+
 #### 1.3.9
 * update composer dependencies
 
