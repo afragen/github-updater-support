@@ -8,8 +8,7 @@
  * It can install a plugin from w.org, GitHub, Bitbucket, GitLab, Gitea or direct URL.
  *
  * @package   WP_Dependency_Installer
- * @author    Andy Fragen
- * @author    Matt Gibbs
+ * @author    Andy Fragen, Matt Gibbs
  * @license   MIT
  * @link      https://github.com/afragen/wp-dependency-installer
  */
@@ -130,11 +129,10 @@ if ( ! class_exists( 'WP_Dependency_Installer' ) ) {
 				$api           = parse_url( $uri, PHP_URL_HOST );
 				$scheme        = parse_url( $uri, PHP_URL_SCHEME );
 				$scheme        = ! empty( $scheme ) ? $scheme . '://' : 'https://';
-				$host          = $dependency['host'];
 				$path          = parse_url( $uri, PHP_URL_PATH );
 				$owner_repo    = str_replace( '.git', '', trim( $path, '/' ) );
 
-				switch ( $host ) {
+				switch ( $dependency['host'] ) {
 					case 'github':
 						$base          = null === $api || 'github.com' === $api ? 'api.github.com' : $api;
 						$download_link = "{$scheme}{$base}/repos/{$owner_repo}/zipball/{$dependency['branch']}";
@@ -143,15 +141,14 @@ if ( ! class_exists( 'WP_Dependency_Installer' ) ) {
 						}
 						break;
 					case 'bitbucket':
-						$hosted        = 'bitbucket.org';
-						$base          = null === $api || $hosted === $api ? $hosted : $api;
+						$base          = null === $api || 'bitbucket.org' === $api ? 'bitbucket.org' : $api;
 						$download_link = "{$scheme}{$base}/{$owner_repo}/get/{$dependency['branch']}.zip";
 						break;
 					case 'gitlab':
-						$hosted        = 'gitlab.com';
-						$base          = null === $api || $hosted === $api ? $hosted : $api;
-						$download_link = "{$scheme}{$base}/{$owner_repo}/repository/archive.zip";
-						$download_link = add_query_arg( 'ref', $dependency['branch'], $download_link );
+						$base          = null === $api || 'gitlab.com' === $api ? 'gitlab.com' : $api;
+						$project_id    = rawurlencode( $owner_repo );
+						$download_link = "{$scheme}{$base}/api/v4/projects/{$project_id}/repository/archive.zip";
+						$download_link = add_query_arg( 'sha', $dependency['branch'], $download_link );
 						if ( ! empty( $dependency['token'] ) ) {
 							$download_link = add_query_arg( 'private_token', $dependency['token'], $download_link );
 						}
@@ -161,13 +158,24 @@ if ( ! class_exists( 'WP_Dependency_Installer' ) ) {
 						if ( ! empty( $dependency['token'] ) ) {
 							$download_link = add_query_arg( 'access_token', $dependency['token'], $download_link );
 						}
-					case 'wordpress':
+						break;
+					case 'wordpress':  // phpcs:ignore WordPress.WP.CapitalPDangit.Misspelled
 						$download_link = $this->get_dot_org_latest_download( basename( $owner_repo ) );
 						break;
 					case 'direct':
 						$download_link = filter_var( $uri, FILTER_VALIDATE_URL );
 						break;
 				}
+
+				/**
+				 * Allow filtering of download link for dependency configuration.
+				 *
+				 * @since 1.4.11
+				 *
+				 * @param string $download_link Download link.
+				 * @param array  $dependency    Dependency configuration.
+				 */
+				$download_link = apply_filters( 'wp_dependency_download_link', $download_link, $dependency );
 
 				$this->config[ $slug ]['download_link'] = $download_link;
 			}
@@ -181,13 +189,14 @@ if ( ! class_exists( 'WP_Dependency_Installer' ) ) {
 		 */
 		private function get_dot_org_latest_download( $slug ) {
 			$download_link = get_site_transient( 'wpdi-' . md5( $slug ) );
+
 			if ( ! $download_link ) {
 				$url           = 'https://api.wordpress.org/plugins/info/1.1/';
 				$url           = add_query_arg(
-					[
-						'action'                     => 'plugin_information',
-						urlencode( 'request[slug]' ) => $slug,
-					],
+					array(
+						'action'                        => 'plugin_information',
+						rawurlencode( 'request[slug]' ) => $slug,
+					),
 					$url
 				);
 				$response      = wp_remote_get( $url );
@@ -338,6 +347,13 @@ if ( ! class_exists( 'WP_Dependency_Installer' ) ) {
 				return array(
 					'status'  => 'error',
 					'message' => $result->get_error_message(),
+				);
+			}
+
+			if ( null === $result ) {
+				return array(
+					'status'  => 'error',
+					'message' => esc_html__( 'Plugin download failed' ),
 				);
 			}
 
@@ -507,6 +523,17 @@ if ( ! class_exists( 'WP_Dependency_Installer' ) ) {
 
 			return $actions;
 		}
+
+		/**
+		 * Get the configuration.
+		 *
+		 * @since 1.4.11
+		 *
+		 * @return array The configuration.
+		 */
+		public function get_config() {
+			return $this->config;
+		}
 	}
 
 	require_once ABSPATH . 'wp-admin/includes/class-wp-upgrader.php';
@@ -518,7 +545,7 @@ if ( ! class_exists( 'WP_Dependency_Installer' ) ) {
 		public function header() {}
 		public function footer() {}
 		public function error( $errors ) {}
-		public function feedback( $string ) {}
+		public function feedback( $string, ...$args ) {}
 	}
 
 }
