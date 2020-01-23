@@ -1,6 +1,6 @@
 #### [unreleased]
 
-#### 1.4.1
+#### 1.4.1 - 1.4.2
 * update composer dependencies
 
 #### 1.4.0
