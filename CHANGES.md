@@ -1,5 +1,8 @@
 #### [unreleased]
 
+#### 1.5.0
+* update for WP Dependency Installer v3.0.0
+
 #### 1.4.1 - 1.4.2
 * update composer dependencies
 
